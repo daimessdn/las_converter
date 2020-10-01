@@ -25,7 +25,7 @@ class WellLog():
         """
         Load data from LAS file
         """
-        for i in self.file[:50]:
+        for i in self.file:
             if (i[0] == "~"):
                 las_section = (i[1:-1].lower().replace(" ", "_") 
                                     if "~a" not in i.lower()
