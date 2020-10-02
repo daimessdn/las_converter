@@ -25,6 +25,7 @@ log1 = WellLog("/home/dimaswehhh/Downloads/well log data/TU1.LAS")
         self.file = open(file).readlines()
         self.info = {}
 
+        # print([i[1:-1] for i in self.file if i[0] == "~"])
         self.load_data()
         
     def load_data(self):
@@ -70,10 +71,22 @@ log1 = WellLog("/home/dimaswehhh/Downloads/well log data/TU1.LAS")
                                 self.info["data_table"][j] = np.array([])
 
                         data_ranges = np.array([j for j in " ".join(i.split()).split(" ")]).astype("float64")
+                        # print(data_ranges)
                         
                         for j in range(len(well_specs_list)):
                             self.info["data_table"][
                                 well_specs_list[j]
                                 ] = np.append(self.info["data_table"][well_specs_list[j]],
                                               data_ranges[j])
-                        
+
+                            # print(well_specs_list[j],
+                            #       self.info["data_table"][well_specs_list[j]].dtype,
+                            #       self.info["data_table"][well_specs_list[j]])
+
+# log1 = WellLog("/home/dimaswehhh/Downloads/well log data/TU1.LAS")
+# log1 = WellLog("/home/dimaswehhh/Downloads/well log data/1045139086.las")
+
+# print(log1.info)
+# print(log1.info["data_table"].keys())
+# print(log1.info["data_table"])
+# print(log1.info["data_table"]["m__depth.ft"])
