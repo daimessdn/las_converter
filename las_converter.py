@@ -2,25 +2,18 @@ import numpy as np
 
 class WellLog():
     """
-    WellLog class
-    representation of well log database
-log1 = WellLog("/home/dimaswehhh/Downloads/well log data/TU1.LAS")
-# log1 = WellLog("/home/dimaswehhh/Downloads/well log data/1045139086.las")
-
-# print(log1.info)
-# print(log1.info["data_table"].keys())
-# print(log1.info["data_table"])
-    params:
-    - file : str
-      specifies file inputted for process well log data
-      LAS file needed
+    WellLog
+      description:
+        Defines well log database with LAS file input.
+     
+      parameter input(s):
+        - file (str)
+            Specifies LAS file inputted for process well log data.
     """
     def __init__(self, file):
         """
-        Initiation of well log instance
-        exact one argument file: LAS file location
-        example:
-        - log1 = WellLog("file://WA1.LAS")
+        description:
+          Initiate well log instance
         """
         self.file = open(file).readlines()
         self.info = {
@@ -33,7 +26,13 @@ log1 = WellLog("/home/dimaswehhh/Downloads/well log data/TU1.LAS")
         
     def load_data(self):
         """
-        Load data from LAS file
+        load_data()
+          description:
+            Load data from LAS file.
+
+          additional notes:
+            The function will be executed by default
+            when WellLog class is initiated.
         """
         for i in self.file:
             if (i[0] == "~"):
@@ -53,7 +52,8 @@ log1 = WellLog("/home/dimaswehhh/Downloads/well log data/TU1.LAS")
                         one_spaced_line_splitted_colon = one_spaced_line.split(":")
                         one_spaced_line_splitted_colon[1] = one_spaced_line_splitted_colon[1].strip()
 
-                        # define informations properties as key-value pair
+                        # define informations properties
+                        ## as key-value pair
                         prop_pattern = [j.strip()
                                             for j in one_spaced_line_splitted_colon[0]
                                             .split(" ", 1)]
@@ -67,6 +67,10 @@ log1 = WellLog("/home/dimaswehhh/Downloads/well log data/TU1.LAS")
                         self.info["description"][section[-1]][prop_pattern[0].lower()] = one_spaced_line_splitted_colon[1]
 
                     else:
+                        # fill the data table
+
+                        # init'd the data table column
+                        ## from curve information properties
                         if (self.info["data_table"] == {}):
                             well_specs =  self.info[
                                 [k for k in section if "curve_info" in k][0]
@@ -92,7 +96,19 @@ log1 = WellLog("/home/dimaswehhh/Downloads/well log data/TU1.LAS")
                         
     def get_description(self, section=None):
         """
-        Get the loaded well log data description
+        get_description:
+        |-- description:
+        |   - Get the loaded well log data description
+        |
+        |-- parameter input(s):
+        |    - section (str)
+        |        Get the well log information based on section input
+        |        Return list of sections input provided if section is not given
+        |        Default value = None
+        |
+        |-- output(s)
+        |   - list of sections input provided (if section == None)
+        |   - list of section properties based on section input given     
         """
 
         if (section == None):
