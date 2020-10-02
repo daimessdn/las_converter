@@ -98,18 +98,18 @@ class WellLog():
     def get_description(self, section=None):
         """
         get_description:
-        |-- description:
-        |   - Get the loaded well log data description
-        |
-        |-- parameter input(s):
-        |    - section (str)
-        |        Get the well log information based on section input
-        |        Return list of sections input provided if section is not given
-        |        Default value = None
-        |
-        |-- output(s)
-        |   - list of sections input provided (if section == None)
-        |   - list of section properties based on section input given     
+          description:
+            Get the loaded well log data description
+        
+          parameter input(s):
+            - section (str)
+                Get the well log information based on section input
+                Return list of sections input provided if section is not given
+                Default value = None
+        
+          output(s)
+            - list of sections input provided (if section == None)
+            - list of section properties based on section input given     
         """
 
         if (section == None):
