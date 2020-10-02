@@ -85,13 +85,25 @@ class WellLog():
                             for j in well_specs_list:
                                 self.info["data_table"][j] = np.array([])
 
+                        # init'd well information
+                        well_info = [k for k in section if "well_info" in k][0]
+
+                        # init'd null values
+                        ## based on well information
+                        null_values = [k for k in self.info[well_info] if "null" in k][0]
+
                         data_ranges = np.array([j for j in " ".join(i.split()).split(" ")]).astype("float64")
                         
                         for j in range(len(well_specs_list)):
+                            if (data_ranges[j] != float(self.info[well_info][null_values])):
+                                data_filled = data_ranges[j]
+                            else:
+                                data_filled = None
+
                             self.info["data_table"][
-                                well_specs_list[j]
+                                    well_specs_list[j]
                                 ] = np.append(self.info["data_table"][well_specs_list[j]],
-                                              data_ranges[j])
+                                              data_filled)
 
         return
                         
