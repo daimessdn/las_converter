@@ -28,6 +28,8 @@ log1 = WellLog("/home/dimaswehhh/Downloads/well log data/TU1.LAS")
         }
 
         self.load_data()
+
+        return
         
     def load_data(self):
         """
@@ -85,4 +87,24 @@ log1 = WellLog("/home/dimaswehhh/Downloads/well log data/TU1.LAS")
                                 well_specs_list[j]
                                 ] = np.append(self.info["data_table"][well_specs_list[j]],
                                               data_ranges[j])
+
+        return
                         
+    def get_description(self, section=None):
+        """
+        Get the loaded well log data description
+        """
+
+        if (section == None):
+            print("There are some well properties with description provided.")
+
+            for i, j in self.info["description"].items():
+                print("-", i)
+
+        else:
+            print("Describing well log information about '%s'" % (section))
+
+            for i, j in self.info["description"][section].items():
+                print("-", i, ":", j)
+
+        return
