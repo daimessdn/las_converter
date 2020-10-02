@@ -118,9 +118,13 @@ class WellLog():
                 print("-", i)
 
         else:
-            print("Describing well log information about '%s'" % (section))
+            if (self.info["description"][section]) != {}:
+                print("Describing well log information about '%s'" % (section))
 
-            for i, j in self.info["description"][section].items():
-                print("-", i, ":", j)
+                for i, j in self.info["description"][section].items():
+                    print("-", i, ":", j)
+            
+            else:
+                print("There are no description in section: '%s'" % (section))
 
         return
