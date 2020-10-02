@@ -20,6 +20,7 @@ class WellLog():
             "description": {}
         }
 
+        print("Loading well data. It will takes time for a while...")
         self.load_data()
 
         return
