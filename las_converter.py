@@ -23,7 +23,9 @@ log1 = WellLog("/home/dimaswehhh/Downloads/well log data/TU1.LAS")
         - log1 = WellLog("file://WA1.LAS")
         """
         self.file = open(file).readlines()
-        self.info = {}
+        self.info = {
+            "description": {}
+        }
 
         self.load_data()
         
@@ -36,13 +38,18 @@ log1 = WellLog("/home/dimaswehhh/Downloads/well log data/TU1.LAS")
                 las_section = (i[1:-1].lower().replace(" ", "_") 
                                     if "~a" not in i.lower()
                                     else "data_table")
+
+                self.info["description"][las_section] = {}
+                
                 self.info[las_section] = {}
+
             else:
                 section = list(self.info)
                 if (i[0] != "#"):
                     if (section[-1] != "data_table"):
                         one_spaced_line = " ".join(i.split())
                         one_spaced_line_splitted_colon = one_spaced_line.split(":")
+                        one_spaced_line_splitted_colon[1] = one_spaced_line_splitted_colon[1].strip()
 
                         # define informations properties as key-value pair
                         prop_pattern = [j.strip()
@@ -54,6 +61,8 @@ log1 = WellLog("/home/dimaswehhh/Downloads/well log data/TU1.LAS")
                                             else prop_pattern[1])
 
                         self.info[section[-1]][prop_pattern[0].lower()] = prop_pattern[1]
+
+                        self.info["description"][section[-1]][prop_pattern[0].lower()] = one_spaced_line_splitted_colon[1]
 
                     else:
                         if (self.info["data_table"] == {}):
