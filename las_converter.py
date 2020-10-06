@@ -34,8 +34,8 @@ class WellLog():
         for i in self.file:
             if (i[0] == "~"):
                 las_section = (i[1:-1].lower().replace(" ", "_") 
-                                    if "~a" not in i.lower()
-                                    else "data_table")
+                                if "~a" not in i.lower()
+                                else "data_table")
 
                 self.info["description"][las_section] = {}
                 
@@ -70,8 +70,9 @@ class WellLog():
                         ## from curve information properties
                         if (self.info["data_table"] == {}):
                             well_specs =  self.info[
-                                [k for k in section if "curve_info" in k][0]
-                            ]
+                                            [k for k in section if "curve_info" in k][0]
+                                          ]
+                            
                             well_specs_list = list(well_specs)
 
                             self.info[[k for k in section if "curve_info" in k][0]] = well_specs_list
@@ -150,19 +151,18 @@ class WellLog():
         """
 
         if (file_as == "JSON" or
-            file_as == "JSON".lower()
-        ):
+          file_as == "JSON".lower()):
             well_temp = self.info["data_table"]
 
             for i, j in self.info["data_table"].items():
                 self.info["data_table"][i] = list(j)
 
-            with open('well1.json', 'w') as json_file:
+            with open('well.json', 'w') as json_file:
                 json.dump(self.info, json_file)
 
             self.info["data_table"] = well_temp
             
-            print("Well lo data saved as JSON.")
+            print("Well log data saved as JSON.")
 
         else:
             print("File extension is not supported")
