@@ -1,3 +1,4 @@
+import json
 import numpy as np
 
 class WellLog():
@@ -132,5 +133,38 @@ class WellLog():
             
             else:
                 print("There are no description in section: '%s'" % (section))
+
+        return
+
+    def save_file(self, file_as):
+        """
+        Save the LAS file into other file
+        JSON file supported
+        
+          parameter input(s):
+            - file_as (str)
+              File extension will be used to save the file
+        
+          output(s)
+            - File based on extension     
+        """
+
+        if (file_as == "JSON" or
+            file_as == "JSON".lower()
+        ):
+            well_temp = self.info["data_table"]
+
+            for i, j in self.info["data_table"].items():
+                self.info["data_table"][i] = list(j)
+
+            with open('well1.json', 'w') as json_file:
+                json.dump(self.info, json_file)
+
+            self.info["data_table"] = well_temp
+            
+            print("Well lo data saved as JSON.")
+
+        else:
+            print("File extension is not supported")
 
         return
