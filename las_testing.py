@@ -18,3 +18,7 @@ log2 = las_converter.WellLog("/home/dimaswehhh/Downloads/well log data/104513908
 # ... and also display well 2 information
 log2.get_description()
 log2.get_description("well_information")
+
+# let's test for saving well 2
+## in JSON
+log2.save_file("json")
