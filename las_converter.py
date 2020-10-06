@@ -2,18 +2,15 @@ import numpy as np
 
 class WellLog():
     """
-    WellLog
-      description:
-        Defines well log database with LAS file input.
+    Defines well log database with LAS file input.
      
       parameter input(s):
         - file (str)
-            Specifies LAS file inputted for process well log data.
+          Specifies LAS file inputted for process well log data.
     """
     def __init__(self, file):
         """
-        description:
-          Initiate well log instance
+        Initiate well log instance
         """
         self.file = open(file).readlines()
         self.info = {
@@ -27,9 +24,7 @@ class WellLog():
         
     def load_data(self):
         """
-        load_data()
-          description:
-            Load data from LAS file.
+        Load data from LAS file.
 
           additional notes:
             The function will be executed by default
@@ -109,15 +104,13 @@ class WellLog():
                         
     def get_description(self, section=None):
         """
-        get_description:
-          description:
-            Get the loaded well log data description
+        Get the loaded well log data description
         
           parameter input(s):
             - section (str)
-                Get the well log information based on section input
-                Return list of sections input provided if section is not given
-                Default value = None
+              Get the well log information based on section input
+              Return list of sections input provided if section is not given
+              Default value = None
         
           output(s)
             - list of sections input provided (if section == None)
