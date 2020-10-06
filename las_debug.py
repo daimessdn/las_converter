@@ -83,10 +83,3 @@ log1 = WellLog("/home/dimaswehhh/Downloads/well log data/TU1.LAS")
                             #       self.info["data_table"][well_specs_list[j]].dtype,
                             #       self.info["data_table"][well_specs_list[j]])
 
-# log1 = WellLog("/home/dimaswehhh/Downloads/well log data/TU1.LAS")
-# log1 = WellLog("/home/dimaswehhh/Downloads/well log data/1045139086.las")
-
-# print(log1.info)
-# print(log1.info["data_table"].keys())
-# print(log1.info["data_table"])
-# print(log1.info["data_table"]["m__depth.ft"])
