@@ -54,7 +54,6 @@ class WellLog():
 
             else:
                 section = list(self.info)
-                print(i)
 
                 if (i[0] != "#"):
                     if (section[-1] != "data_table"):
@@ -148,6 +147,30 @@ class WellLog():
             else:
                 print("There are no description in section: '%s'" % (section))
 
+        return
+
+    def get_data(self, section):
+        """
+        Get the loaded well log data information
+        
+          parameter input(s):
+            - section (str)
+              Get the well log information based on section input
+        
+          output(s)
+            - list of information based on input provided.   
+        """
+
+        if (section != None):
+            print("Getting information:", section)
+            # manual print for getting well log description
+            if ("curve" in section):
+                for i in self.info[section]:
+                    print(i)
+            else:
+                for i, j in self.info[section].items():
+                    print("-", i, ":", j)
+                
         return
 
     def save_file(self, file_as):
