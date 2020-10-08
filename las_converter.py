@@ -1,4 +1,5 @@
 import json
+import requests
 import numpy as np
 
 class WellLog():
@@ -13,7 +14,16 @@ class WellLog():
         """
         Initiate well log instance
         """
-        self.file = open(file).readlines()
+
+        # validate file source
+        ## between local file and URL requests
+        if ("https" in file):
+            print("Getting LAS file from URL source...")
+            self.file = requests.get(file, stream=True).text.split("\n")[:-1]
+        else:
+            print("Getiing LAS file from local drive...")
+            self.file = open(file).readlines()
+
         self.info = {
             "description": {}
         }
@@ -43,6 +53,8 @@ class WellLog():
 
             else:
                 section = list(self.info)
+                print(i)
+
                 if (i[0] != "#"):
                     if (section[-1] != "data_table"):
                         one_spaced_line = " ".join(i.split())
