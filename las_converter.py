@@ -20,6 +20,7 @@ class WellLog():
         if ("https" in file):
             print("Getting LAS file from URL source...")
             self.file = requests.get(file, stream=True).text.split("\n")[:-1]
+            
         else:
             print("Getiing LAS file from local drive...")
             self.file = open(file).readlines()
