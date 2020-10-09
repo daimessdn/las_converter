@@ -19,7 +19,7 @@ to the well data.
 This project uses **Python 3** with dependencies provided in **requirements.txt**. 
 
 ### Project setup
-Python environment setup is recommended for using this project repository. Type `./check-pyenv.sh` for validating Python environments. By default, Python `virtualenv` has not been set yet so that it will be return results as below.
+Python environment setup is recommended for using this project repository. Type `./check-pyenv.sh` (using Linux/Unix terminal console or WSL console) for validating Python environments. By default, Python `virtualenv` has not been set yet so that it will be return results as below.
 
 ```sh
 'env' directory is not exist.
