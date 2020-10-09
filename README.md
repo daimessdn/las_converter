@@ -16,7 +16,10 @@ to the well data.
 - Save well log data into JSON file.
 
 ### Project dependencies
-- numpy
+This project uses **Python 3** with dependencies provided in **requirements.txt**. 
+
+### Project setup
+Python environment setup is recommended for using this project repository. Type `./check-pyenv.sh` for validating Python environments.
 
 ### Operation methods
 #### Method 1: direct use
