@@ -1,4 +1,6 @@
+# Python caches
 __pycache__/
 .ipynb_checkpoints/
 *.swp
 *.pyc
+env/*
