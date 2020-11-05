@@ -1,6 +1,11 @@
-import json
 import requests
+
+import json
+
+import pandas as pd
 import numpy as np
+
+from datetime import datetime
 
 class WellLog():
     """
@@ -19,12 +24,12 @@ class WellLog():
         ## between local file and URL requests
         if ("https" in file):
             print("Getting LAS file from URL source...")
-            self.file = requests.get(file, stream=True).text.split("\n")[:-1]
-            
+            self.file = requests.get(file, stream=True).text.split("\n")[:-1]    
         else:
             print("Getiing LAS file from local drive...")
             self.file = open(file).readlines()
 
+        # init'd empty information
         self.info = {
             "description": {}
         }
@@ -42,30 +47,43 @@ class WellLog():
             The function will be executed by default
             when WellLog class is initiated.
         """
-        
+
+        # init'd what information contained in LAS file
+        ex_init = datetime.now()
+        section_title = ["version", "well", "curve", "parameter", "other"]
+        order = 0
+
+        # read each rows of LAS data
         for i in self.file:
+            # validate rows of data
+            # if contains title section
             if (i[0] == "~"):
-                las_section = (i[1:-1].lower().replace(" ", "_") 
+                # print(section_title[order] in i.lower())
+                las_section = (section_title[order]
                                 if "~a" not in i.lower()
                                 else "data_table")
+                order += 1
 
                 self.info["description"][las_section] = {}
                 
-                self.info[las_section] = {}
+                self.info[las_section] = {} 
 
+            # for aniything else
+            # it will fill the section init'd before
             else:
                 section = list(self.info)
+                # print(section)
 
                 if (i[0] != "#"):
                     if (section[-1] != "data_table"):
-                        one_spaced_line = " ".join(i.split())
-                        one_spaced_line_splitted_colon = one_spaced_line.split(":")
-                        one_spaced_line_splitted_colon[1] = one_spaced_line_splitted_colon[1].strip()
+                        line = " ".join(i.split())
+                        line = line.split(":")
+                        line[1] = line[1].strip()
 
                         # define informations properties
                         ## as key-value pair
                         prop_pattern = [j.strip()
-                                            for j in one_spaced_line_splitted_colon[0]
+                                            for j in line[0]
                                             .split(" ", 1)]
 
                         prop_pattern[1] = (float(prop_pattern[1])
@@ -74,46 +92,39 @@ class WellLog():
 
                         self.info[section[-1]][prop_pattern[0].lower()] = prop_pattern[1]
 
-                        self.info["description"][section[-1]][prop_pattern[0].lower()] = one_spaced_line_splitted_colon[1]
+                        self.info["description"][section[-1]][prop_pattern[0].lower()] = line[1]
 
                     else:
                         # fill the data table
+                        # print(section)
 
                         # init'd the data table column
                         ## from curve information properties
                         if (self.info["data_table"] == {}):
-                            well_specs =  self.info[
-                                            [k for k in section if "curve_info" in k][0]
-                                          ]
-                            
-                            well_specs_list = list(well_specs)
+                            well_specs =  list(self.info["curve"])
 
-                            self.info[[k for k in section if "curve_info" in k][0]] = well_specs_list
-                            well_specs = well_specs_list
+                            self.info[["curve"][0]] = well_specs
 
                             # init'd empty space for each curve property
-                            for j in well_specs_list:
+                            for j in well_specs:
                                 self.info["data_table"][j] = np.array([])
 
-                        # init'd well information
-                        well_info = [k for k in section if "well_info" in k][0]
 
                         # init'd null values
                         ## based on well information
-                        null_values = [k for k in self.info[well_info] if "null" in k][0]
+                        null_values = [k for k in self.info["well"] if "null" in k][0]
 
                         data_ranges = np.array([j for j in " ".join(i.split()).split(" ")]).astype("float64")
                         
-                        for j in range(len(well_specs_list)):
-                            if (data_ranges[j] != float(self.info[well_info][null_values])):
-                                data_filled = data_ranges[j]
-                            else:
-                                data_filled = None
+                        for j in range(len(well_specs)):
+                            data_filled = data_ranges[j] if (data_ranges[j] != float(self.info["well"][null_values])) else None
 
                             self.info["data_table"][
-                                    well_specs_list[j]
-                                ] = np.append(self.info["data_table"][well_specs_list[j]],
+                                    well_specs[j]
+                                ] = np.append(self.info["data_table"][well_specs[j]],
                                               data_filled)
+
+        print("Well log data loaded for {} s".format((datetime.now() - ex_init).total_seconds()))
 
         return
                         
@@ -200,6 +211,16 @@ class WellLog():
             self.info["data_table"] = well_temp
             
             print("Well log data saved as JSON.")
+
+        elif (file_as == "CSV" or
+          file_as == "CSV".lower()):
+            well_temp = self.info["data_table"]
+            # columns = list(well_temp.keys())
+
+            df = pd.DataFrame(well_temp)
+            df.to_csv("well.csv")
+
+            print("Well log data saved as CSV.")
 
         else:
             print("File extension is not supported")
