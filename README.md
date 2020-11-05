@@ -56,5 +56,4 @@ help(WellLog)
 
 There is a file named `las_testing.py` used for testing purposes. There is also Jupyter Notebook file called `using_las_converter_in_well_log_analysis.ipynb` that also can be used in Jupyter console.
 
-For testing the saved files in `results` folder, there is also Jupyter Notebook file `
-
+For testing the saved files in `results` folder, there is also Jupyter Notebook file `using_csv_made_from_las_converter_for_well_log_analysis.ipynb`.
