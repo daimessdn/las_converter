@@ -5,15 +5,17 @@
 **LAS** file contains physical properties data of vertical subsurface
 used in well log analysis. Well log data saved in LAS file contains
 some information, including its file **version**, **well description**,
-**physical rock curve** along with data table and other information related
-to the well data.
+**physical rock curve** along with **data table** and **other information** related to the well data.
 
 ### Project feature(s)
 - Load LAS data from various sources:
     - URL link (`https://example.com/.../.../path/to/lasfile.LAS`)
     - Local file (`path/to/lasfile.LAS` instead without `https`)
 - Getting well log description.
-- Save well log data into JSON file.
+- Save well log data into JSON file (as `well.json` in `results` folder).
+- It also can save data into CSV file with two different outputs in `results` folder
+    - `well.csv` contains well data table
+    - `description.csv` contains well data legends and description
 
 ### Project dependencies
 This project uses **Python 3** with dependencies provided in **requirements.txt**. 
@@ -52,5 +54,7 @@ from las_converter import WellLog
 help(WellLog)
 ```
 
-There is a file named `las_testing.py` used for testing purposes and can be used. There is also Jupyter Notebook file called `using_las_converter_in_well_log_analysis.ipynb` that also can be used in Jupyter console.
+There is a file named `las_testing.py` used for testing purposes. There is also Jupyter Notebook file called `using_las_converter_in_well_log_analysis.ipynb` that also can be used in Jupyter console.
+
+For testing the saved files in `results` folder, there is also Jupyter Notebook file `
 
