@@ -42,6 +42,7 @@ class WellLog():
             The function will be executed by default
             when WellLog class is initiated.
         """
+        
         for i in self.file:
             if (i[0] == "~"):
                 las_section = (i[1:-1].lower().replace(" ", "_") 
