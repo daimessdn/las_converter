@@ -24,7 +24,8 @@ class WellLog():
         ## between local file and URL requests
         if ("https" in file):
             print("Getting LAS file from URL source...")
-            self.file = requests.get(file, stream=True).text.split("\n")[:-1]    
+            self.file = requests.get(file, stream=True).text.split("\n")[:-1]
+
         else:
             print("Getiing LAS file from local drive...")
             self.file = open(file).readlines()
@@ -215,10 +216,21 @@ class WellLog():
         elif (file_as == "CSV" or
           file_as == "CSV".lower()):
             well_temp = self.info["data_table"]
-            # columns = list(well_temp.keys())
 
             df = pd.DataFrame(well_temp)
-            df.to_csv("well.csv")
+            df.to_csv("well.csv", index=False)
+
+            complete_desc = {}
+
+            for i, j in self.info["description"].items():
+                complete_desc.update(j)
+
+            df = pd.DataFrame(complete_desc, index=[0])
+            df = df.T.reset_index()
+            print(list(df.columns))
+            df.rename(columns={"index": "name", 0: "description"}, inplace=True)
+
+            df.to_csv("description.csv", index=False)
 
             print("Well log data saved as CSV.")
 

@@ -1,0 +1,26 @@
+name,description
+vers.,CWLS LOG ASCII STANDARD--VERSION 2.0
+wrap.,ONE LINE PER DEPTH STEP
+strt.ft,START DEPTH
+stop.ft,STOP DEPTH
+step.ft,STEP
+null.,NULL VALUE
+comp.,COMPANY
+well.,WELL NAME
+uwi.,WELL UWI
+api.,WELL API
+loc.,WELL LOCATION
+date.,WELL DATE
+fld.,Project NAME
+m__depth.ft,M__DEPTH
+sp,SP
+gr,GR
+cali,CALI
+bitsize,BitSize
+msfl,MSFL
+lld,LLD
+lls,LLS
+rhob,RHOB
+nphi,NPHI
+dt,DT
+mudwgt,MudWgt
