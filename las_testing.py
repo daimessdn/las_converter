@@ -12,7 +12,7 @@ import las_converter
 # log1.get_description()
 
 # ## display specific description for well information
-# log1.get_description("well_information")
+# log1.get_description("well")
 
 # let's try with another well instance ...
 ## from URL source
@@ -20,11 +20,36 @@ import las_converter
 log2 = las_converter.WellLog("samples/WA2.LAS")
 
 # ... and also display well 2 information
-log2.get_description()
-log2.get_description("well_information")
+# log2.get_description()
+# log2.get_description("well")
 
-log2.get_data("well_information")
+# log2.get_data("well")
 
 # let's test for saving well 2
 ## in JSON
 # log2.save_file("json")
+
+i = int(input("""type action: 
+1. view description of well data
+2. save file data
+else for quit
+> """))
+
+
+while (i <= 2):
+    if (i == 1):
+        log2.get_description()
+        desc_input = str(input("\ntype the description: "))
+        log2.get_description(desc_input)
+
+    elif (i == 2):
+        save_input = str(input(("\nselect file type to save (JSON only supported): ")))
+        log2.save_file(save_input)
+
+    i = int(input("""\n type action: 
+1. view description of well data
+2. save file data
+else for quit
+> """))
+
+print("quiting...")
