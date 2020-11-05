@@ -206,7 +206,7 @@ class WellLog():
             for i, j in self.info["data_table"].items():
                 self.info["data_table"][i] = list(j)
 
-            with open('well.json', 'w') as json_file:
+            with open('results/well.json', 'w') as json_file:
                 json.dump(self.info, json_file)
 
             self.info["data_table"] = well_temp
@@ -218,7 +218,7 @@ class WellLog():
             well_temp = self.info["data_table"]
 
             df = pd.DataFrame(well_temp)
-            df.to_csv("well.csv", index=False)
+            df.to_csv("results/well.csv", index=False)
 
             complete_desc = {}
 
@@ -227,12 +227,11 @@ class WellLog():
 
             df = pd.DataFrame(complete_desc, index=[0])
             df = df.T.reset_index()
-            print(list(df.columns))
             df.rename(columns={"index": "name", 0: "description"}, inplace=True)
 
-            df.to_csv("description.csv", index=False)
+            df.to_csv("results/description.csv", index=False)
 
-            print("Well log data saved as CSV.")
+            print("Well log data saved as CSV (well.csv and description.csv).")
 
         else:
             print("File extension is not supported")

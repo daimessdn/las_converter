@@ -29,27 +29,35 @@ log2 = las_converter.WellLog("samples/WA2.LAS")
 ## in JSON
 # log2.save_file("json")
 
-i = int(input("""type action: 
+i = int(input("""\ntype action: 
 1. view description of well data
 2. save file data
-else for quit
-> """))
+any number for quit
+> \33[33m\33[1m"""))
 
 
 while (i <= 2):
     if (i == 1):
         log2.get_description()
-        desc_input = str(input("\ntype the description: "))
+        desc_input = str(
+            input(
+                "\n\33[0mtype the description: \33[33m\33[1m"
+        ))
+
         log2.get_description(desc_input)
 
     elif (i == 2):
-        save_input = str(input(("\nselect file type to save (JSON only supported): ")))
+        save_input = str(
+            input(
+                ("\n\33[0mselect file type to save (JSON or CSV supported): \33[33m\33[1m")
+        ))
+
         log2.save_file(save_input)
 
-    i = int(input("""\n type action: 
+    i = int(input("""\n\33[0mtype action: 
 1. view description of well data
 2. save file data
-else for quit
-> """))
+any number for quit
+> \33[33m\33[1m"""))
 
-print("quiting...")
+print("\nquiting...")
