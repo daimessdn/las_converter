@@ -5,6 +5,9 @@
 
 ---
 
+### Some notes before using las_converter
+This project development will be moved to [oilshit repository](https://github.com/oilshit/las_converter). You can check the latest version there or just use this old repository instead.
+
 ### What is LAS file
 
 [back to top](#las_converter)
